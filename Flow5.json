@@ -1,0 +1,452 @@
+[
+    {
+        "id": "8134e0d063692de1",
+        "type": "tab",
+        "label": "Flow 5-Clima por API",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "fdbb259fe32e54c0",
+        "type": "mqtt in",
+        "z": "8134e0d063692de1",
+        "name": "",
+        "topic": "codigoIoT/MQTT/flow4",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "bbe02c95bbb6c675",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "bac0f84c166d4a89"
+            ]
+        ]
+    },
+    {
+        "id": "bac0f84c166d4a89",
+        "type": "json",
+        "z": "8134e0d063692de1",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 370,
+        "y": 140,
+        "wires": [
+            [
+                "7e43e605bdcf5db3",
+                "43588dd8794cae91"
+            ]
+        ]
+    },
+    {
+        "id": "7e43e605bdcf5db3",
+        "type": "function",
+        "z": "8134e0d063692de1",
+        "name": "Temperatura",
+        "func": "msg.payload = msg.payload.temp;\nmsg.topic = \"Temperatura\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 100,
+        "wires": [
+            [
+                "68a53bdbbb8f54d1",
+                "f3804e8636838987"
+            ]
+        ]
+    },
+    {
+        "id": "43588dd8794cae91",
+        "type": "function",
+        "z": "8134e0d063692de1",
+        "name": "Humedad",
+        "func": "msg.payload = msg.payload.hum;\nmsg.topic = \"Humedad\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 180,
+        "wires": [
+            [
+                "3d820f6da9ba59b2",
+                "f3804e8636838987"
+            ]
+        ]
+    },
+    {
+        "id": "68a53bdbbb8f54d1",
+        "type": "ui_gauge",
+        "z": "8134e0d063692de1",
+        "name": "",
+        "group": "e90628945b743095",
+        "order": 1,
+        "width": 6,
+        "height": 5,
+        "gtype": "donut",
+        "title": "Temperatura",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "3",
+        "max": 10,
+        "colors": [
+            "#729fcf",
+            "#8ae234",
+            "#cc0000"
+        ],
+        "seg1": "17",
+        "seg2": "23",
+        "className": "",
+        "x": 850,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "3d820f6da9ba59b2",
+        "type": "ui_gauge",
+        "z": "8134e0d063692de1",
+        "name": "",
+        "group": "e90628945b743095",
+        "order": 2,
+        "width": 6,
+        "height": 5,
+        "gtype": "wave",
+        "title": "Humedad",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 840,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "f3804e8636838987",
+        "type": "ui_chart",
+        "z": "8134e0d063692de1",
+        "name": "",
+        "group": "e90628945b743095",
+        "order": 3,
+        "width": 12,
+        "height": 7,
+        "label": "Historico local",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 860,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bb39fe92aa632629",
+        "type": "http request",
+        "z": "8134e0d063692de1",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.openweathermap.org/data/2.5/weather?lat=19.054942713618825&lon=-98.76989961392918&appid=f1623d2f393d0b08dda7b45abd01fa5e&units=metric",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 350,
+        "y": 440,
+        "wires": [
+            [
+                "e2d77b45404a96c7"
+            ]
+        ]
+    },
+    {
+        "id": "af9b4430a1fb1d59",
+        "type": "inject",
+        "z": "8134e0d063692de1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 440,
+        "wires": [
+            [
+                "bb39fe92aa632629"
+            ]
+        ]
+    },
+    {
+        "id": "e2d77b45404a96c7",
+        "type": "json",
+        "z": "8134e0d063692de1",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 550,
+        "y": 440,
+        "wires": [
+            [
+                "0aa04a6ad643e72d",
+                "fcaa6732191d065b"
+            ]
+        ]
+    },
+    {
+        "id": "fcaa6732191d065b",
+        "type": "function",
+        "z": "8134e0d063692de1",
+        "name": "Humedad por API",
+        "func": "msg.payload = msg.payload.main.humidity;\nmsg.topic = \"Humedad\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 480,
+        "wires": [
+            [
+                "0b2915ddbaf0b787",
+                "93a1a3e6c28a25b0"
+            ]
+        ]
+    },
+    {
+        "id": "0aa04a6ad643e72d",
+        "type": "function",
+        "z": "8134e0d063692de1",
+        "name": "Temperatura API",
+        "func": "msg.payload = msg.payload.main.temp;\nmsg.topic = \"Temperatura\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 400,
+        "wires": [
+            [
+                "df33ba42d9b0084f",
+                "93a1a3e6c28a25b0"
+            ]
+        ]
+    },
+    {
+        "id": "df33ba42d9b0084f",
+        "type": "ui_gauge",
+        "z": "8134e0d063692de1",
+        "name": "",
+        "group": "870f00f319c966f6",
+        "order": 1,
+        "width": 6,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Temperatura",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "38",
+        "colors": [
+            "#729fcf",
+            "#8ae234",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 1030,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "0b2915ddbaf0b787",
+        "type": "ui_gauge",
+        "z": "8134e0d063692de1",
+        "name": "",
+        "group": "870f00f319c966f6",
+        "order": 2,
+        "width": 6,
+        "height": 5,
+        "gtype": "donut",
+        "title": "Humedad Relativa",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 1050,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "93a1a3e6c28a25b0",
+        "type": "ui_chart",
+        "z": "8134e0d063692de1",
+        "name": "",
+        "group": "870f00f319c966f6",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Historico",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "3",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1020,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bbe02c95bbb6c675",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e90628945b743095",
+        "type": "ui_group",
+        "name": "Información por MQTT",
+        "tab": "f1cebbb4e5190ad3",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "870f00f319c966f6",
+        "type": "ui_group",
+        "name": "Información por API",
+        "tab": "f1cebbb4e5190ad3",
+        "order": 4,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f1cebbb4e5190ad3",
+        "type": "ui_tab",
+        "name": "Flow 5 - Clima por API",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]
