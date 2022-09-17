@@ -59,21 +59,15 @@ Para ejecutar este flow, es necesario lo siguiente:
 - Para activar las gráficas de clima manual, debes enviar por MQTT un mensaje que contenga un JSON con las variables ID, temp y hum.
 
 
-### Notas
-
-- La sección manual de este flow se suscribe al tema codigoIoT/fow5/mqtt en un broker local.
-- El mensaje mqtt usado para probar este flow es `mosquitto_pub -h localhost -t ccodigoIoT/fow5/mqtt -m '{"ID":"Hugo Vargas","temp":18,"hum":78}'`
-- Para que la gráfica historica muestre información, deben enviarse al menos 2 puntos.
-- Para actualizar la IP del broker publico, se recomienda el siguiente comando `nslookup broker.hivemq.com`. Puedes usar el broker publico de tu elección.
-- Para que multiples graficas sean mostradas en la sección de Histórico Público, es necesario que multiples usuarios se encuentren publicando a la vez.
-
 ## Resultados
 
 A continuación puedes ver los nodos del flow.
-![](https://github.com/hugoescalpelo/flow5-NodeRed-ClimaAPI/blob/main/Imagenes/Nodos.png?raw=true)
+![image](https://user-images.githubusercontent.com/111893490/190843807-1c878f8b-7c89-4851-803c-2e80259e50fc.png)
+
 
 A continuación puede ver el tablero resultante.
-![](https://github.com/hugoescalpelo/flow5-NodeRed-ClimaAPI/blob/main/Imagenes/Dashboard.png?raw=true)
+![image](https://user-images.githubusercontent.com/111893490/190843962-9485a886-1b1f-4b2e-b3f4-81947dc740df.png)
+
 
 ## Evidencias
 
